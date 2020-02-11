@@ -1,3 +1,24 @@
+
+<?php
+
+if (isset($_POST['order'])){
+
+    if(!empty($_POST['email'])){
+        $checkEmail = checkEmail($_POST['email']);
+        if ($checkEmail == false){
+            $resultCheckEmail = "This is not a valid email address"  ;
+        }else{
+            $resultCheckEmail = "This is a valid email address"  ;
+        }
+    }else{
+        $resultCheckEmail = "Enter email address"  ;
+    }// the email input empty
+
+}// after click on order
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,6 +48,7 @@
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
                 <input type="text" id="email" name="email" class="form-control"/>
+                <span class="error">* <?php echo $emailErr;?></span>
             </div>
             <div></div>
         </div>
@@ -52,6 +74,7 @@
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
                     <input type="text" id="zipcode" name="zipcode" class="form-control">
+                    <span class="error">* <?php echo $emailErr;?></span>
                 </div>
             </div>
         </fieldset>
