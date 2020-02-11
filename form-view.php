@@ -1,24 +1,3 @@
-
-<?php
-
-if (isset($_POST['order'])){
-
-    if(!empty($_POST['email'])){
-        $checkEmail = checkEmail($_POST['email']);
-        if ($checkEmail == false){
-            $resultCheckEmail = "This is not a valid email address"  ;
-        }else{
-            $resultCheckEmail = "This is a valid email address"  ;
-        }
-    }else{
-        $resultCheckEmail = "Enter email address"  ;
-    }// the email input empty
-
-}// after click on order
-
-
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,7 +27,7 @@ if (isset($_POST['order'])){
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
                 <input type="text" id="email" name="email" class="form-control"/>
-                <span class="error">* <?php echo $emailErr;?></span>
+                <span class=error">* <?php echo $emailErr;?></span>
             </div>
             <div></div>
         </div>
@@ -60,21 +39,24 @@ if (isset($_POST['order'])){
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
                     <input type="text" name="street" id="street" class="form-control">
+                    <span class="error">* <?php echo $streetErr;?></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
                     <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <span class="error">* <?php echo $numberErr;?></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="city">City:</label>
                     <input type="text" id="city" name="city" class="form-control">
+                    <span class="error">* <?php echo $cityErr;?></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
                     <input type="text" id="zipcode" name="zipcode" class="form-control">
-                    <span class="error">* <?php echo $emailErr;?></span>
+                    <span class="error">* <?php echo $zipErr;?></span>
                 </div>
             </div>
         </fieldset>
@@ -95,7 +77,7 @@ if (isset($_POST['order'])){
 </div>
 
 <style>
-    footer {
+    footer{
         text-align: center;
     }
 </style>

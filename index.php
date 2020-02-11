@@ -17,43 +17,77 @@ function whatIsHappening() {
 }
 
 //Validate email
+//validate address
 $emailErr = "";
+$streetErr="";
+$cityErr="";
+$zipErr="";
+$numberErr="";
+//variables
+$email= "";
+$street="";
+$city="";
+$number="";
+$zipNumber="";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+$products=[];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Check if email field is empty
-    //
-    if (empty($_POST["email"])){
+    //POST sends data
+    if (empty($_POST["email"])) {
         $emailErr = "Please fill in email";
     } else {
         $email = test_input($_POST["email"]);
         //Check if this email format is valid
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $emailErr = "Invalid email format";
-        } else {
-            $emailErr = "Correct";
         }
     }
-}
 
+    if (empty($_POST["street"])) {
+        $streetErr = "Please fill in address";
+
+    }
 //uit W3schools een soort test op input
-function test_input($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
 
+    }
 }
-
 //showing food or drinks
 
 //isset — Determine if a variable is declared and is different
 // than NULL
-if ($_SERVER["REQUEST_METHOD"] == "GET")
-{
-    if (isset($_GET['food'])) {
-        $showfood = htmlspecialchars($_GET['food']);
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET['food'])) {
+            $showfood = htmlspecialchars($_GET['food']);
 
-        if ($showfood) {
+            if ($showfood) {
+                $products = [
+                    ['name' => 'Club Ham', 'price' => 3.20],
+                    ['name' => 'Club Cheese', 'price' => 3],
+                    ['name' => 'Club Cheese & Ham', 'price' => 4],
+                    ['name' => 'Club Chicken', 'price' => 4],
+                    ['name' => 'Club Salmon', 'price' => 5]
+                ];
+
+            } else {
+
+
+                $products = [
+                    ['name' => 'Cola', 'price' => 2],
+                    ['name' => 'Fanta', 'price' => 2],
+                    ['name' => 'Sprite', 'price' => 2],
+                    ['name' => 'Ice-tea', 'price' => 3],
+                ];
+            }
+
+        } else {
             $products = [
                 ['name' => 'Club Ham', 'price' => 3.20],
                 ['name' => 'Club Cheese', 'price' => 3],
@@ -61,33 +95,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
                 ['name' => 'Club Chicken', 'price' => 4],
                 ['name' => 'Club Salmon', 'price' => 5]
             ];
-
-        } else {
-
-
-            $products = [
-                ['name' => 'Cola', 'price' => 2],
-                ['name' => 'Fanta', 'price' => 2],
-                ['name' => 'Sprite', 'price' => 2],
-                ['name' => 'Ice-tea', 'price' => 3],
-            ];
         }
-
-    } else {
-        $products = [
-            ['name' => 'Club Ham', 'price' => 3.20],
-            ['name' => 'Club Cheese', 'price' => 3],
-            ['name' => 'Club Cheese & Ham', 'price' => 4],
-            ['name' => 'Club Chicken', 'price' => 4],
-            ['name' => 'Club Salmon', 'price' => 5]
-        ];
     }
-}
 
 
-$totalValue = 0;
+    $totalValue = 0;
 
-require 'form-view.php';
+    require 'form-view.php';
 
 
 
